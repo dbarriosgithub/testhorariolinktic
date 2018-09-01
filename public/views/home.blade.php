@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="container" ng-app="employeeApp" ng-controller= "mainController">
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <button class="btn btn-primary btn-xs pull-right" data-target="modalEditNew" ng-click="addEmployee()">Add Empleados</button>
@@ -15,13 +15,16 @@
                             </div>
                         @endif
 
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-sm table-bordered table-striped">
+                            <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Firstname</th>
-                                <th>Secondname</th>
-                                <th>Action</th>
+                                <th scope="col">No.</th>
+                                <th scope="col">Firstname</th>
+                                <th scope="col">Secondname</th>
+                                <th scope="col">Action</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             <tr ng-repeat="(index,itememployee) in employee.employee">
                                 <td>
                                     @{{ index+1 }}
@@ -30,12 +33,17 @@
                                 <td>@{{ itememployee.lastName }}</td>
                               
                                 <td>
-                                    <button class="btn btn-success btn-xs" ng-click="editEmployee(itememployee.id)">Edit</button>
-                                    <button class="btn btn-danger btn-xs" ng-click="deleteEmployee(itememployee.id)">Del</button>
-                                    <button class="btn btn-link" ng-click="addScheduleEmployee(itememployee.id)">
-                                        <span class="far fa-calendar-alt fa-2x"></span>
-                                    </button>
+                                    <a class="btn" ng-click="editEmployee(itememployee.id)" role="button">
+                                         <span class="fa fa-pencil-alt fa-2x"></span>
+                                    </a>
+                                    <a class="btn" ng-click="deleteEmployee(itememployee.id)"role="button">
+                                         <span class="fa fa-trash-alt fa-2x"></span>
+                                    </a>
+                                    <a class="btn" ng-click="addScheduleEmployee(itememployee.id)" role="button">
+                                        <span class="fas fa-calendar-alt fa-2x"></span>
+                                    </a>
                             </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -130,6 +138,7 @@
                                     <th>Dia</th> <th>Hora entrada</th><th>Hora salida</th>
                                 </tr>
                                 </thead>
+                                <tbody>
                                 <tr>
                                     <td>Lunes</td>
                                     <td><select id="dayOne" ng-click="setEndHour('dayOne')" ng-model="dayOne" class="form-control">
@@ -205,6 +214,7 @@
                                          @{{dayFiveEnd}}
                                      </label></td>
                                 </tr>
+                                </tbody>
                             </table>
                         </div>
                         <div class="modal-footer">
